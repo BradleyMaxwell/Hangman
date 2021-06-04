@@ -12,7 +12,7 @@ def hangmanState (wrongGuesses):
 
     print(states[wrongGuesses])
 
-def wordState (word, lettersGuessed): 
+def wordState (word, lettersGuessed): # e.g. word = test, player guessed t and s, it will return t_st
     state = ""
     for char in range (len(word)):
         if word[char] not in lettersGuessed:
@@ -21,12 +21,12 @@ def wordState (word, lettersGuessed):
             state += word[char]
     return state
 
-def validateLetter (letter,lettersGuessed):
+def validateLetter (letter,lettersGuessed): #makes sure the player enters a letter that has not been guessed yet
     while len(letter) != 1 and letter.isalpha() and letter not in lettersGuessed:
         letter = input("Enter a valid letter or a letter that has not already been guessed")
     return letter
 
-def validateWord (word):
+def validateWord (word): #make sure the word entered is a string that has no non-letter characters
     while (word.isalpha() != True):
         word = input("Invalid. Enter word to guess: ")
     return word
@@ -41,7 +41,7 @@ def startGame ():
     wrongGuesses = 0
     lettersAlreadyGuessed = ""
 
-    while (wrongGuesses < wrongGuessesAllowed):
+    while (wrongGuesses < wrongGuessesAllowed): # allow letter guesses while the player has not run out of lives
         print(wordState(word,lettersAlreadyGuessed))
         guess = input("Guess a letter:")
         guess = validateLetter(guess,lettersAlreadyGuessed)
@@ -61,3 +61,5 @@ def startGame ():
 
 
 startGame() # need to get it to not allow repeat guesses
+            # need to allow users to enter guesses of the entire word at every turn
+            # need to display hangman state at every turn
